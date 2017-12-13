@@ -3,6 +3,7 @@ import storage from "redux-persist/es/storage" // default: AsyncStorage
 
 import hydratation from "./modules/hydratation"
 import routes from "./modules/routes"
+import authentication from "./modules/authentication"
 
 const config = {
   key: "root",
@@ -21,6 +22,7 @@ function test(state = 0, action) {
 const reducer = persistCombineReducers(config, {
   hydratation,
   routes,
+  authentication,
   test,
 })
 
