@@ -1,0 +1,43 @@
+import { persistStore } from "redux-persist"
+import _ from "lodash/fp/object"
+
+// Actions
+export const HYDRATATION = "hydratation/HYDRATATION"
+
+// Initial state
+const initialState = {
+  done: false,
+  persistor: null,
+  error: null,
+}
+
+// Reducer
+export default function reducer(state = initialState, action) {
+  switch (action.type) {
+    case HYDRATATION: {
+      return _.merge(state, { ...action.payload, done: true })
+    }
+    default: {
+      return state
+    }
+  }
+}
+
+// Action creators
+export const hydrate = store => async dispatch => {
+  const dispatchHydrate = ({ error, persistor }) =>
+    dispatch({ type: HYDRATATION, error, persistor })
+  try {
+    const persistor = await new Promise((resolve, reject) => {
+      const persistor = persistStore(store, null, err => {
+        if (err) reject(err)
+        else resolve(persistor)
+      })
+      // To clear the store:
+      // persistor.purge()
+    })
+    return dispatchHydrate({ persistor })
+  } catch (error) {
+    return dispatchHydrate({ error })
+  }
+}
