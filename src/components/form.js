@@ -13,7 +13,7 @@ export const Form = styled.View`
 INPUTS
 ***********/
 export const TextInput = styled.TextInput`
-  width: 100%;
+  width: 80%;
 `
 
 export const InputField = styled.View`

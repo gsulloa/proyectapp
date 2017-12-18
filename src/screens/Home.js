@@ -5,6 +5,8 @@ import styled from "styled-components/native"
 
 import { Actions } from "react-native-router-flux"
 
+import { logoutUser } from "../redux/modules/authentication"
+
 const Body = styled.View`
   flex: 1;
   background-color: #fff;
@@ -18,7 +20,7 @@ export const Comp1 = connect(state => ({ count: state.test }))(props => (
     <Text>Changes you make will automatically reload.</Text>
     <Text>Shake your phone to open the developer menu.</Text>
     <Text>Hello!!!</Text>
-    <TouchableHighlight onPress={() => Actions.stack_comp2()}>
+    <TouchableHighlight onPress={() => props.dispatch(logoutUser())}>
       <Text>See everything!</Text>
     </TouchableHighlight>
     <Text>{JSON.stringify(props)}</Text>

@@ -16,16 +16,19 @@ class Nav extends Component {
   render = () => {
     return (
       <ConnectedRouter>
-        {this.props.authenticated ? (
+        <Stack key="root">
           <Tabs key="authenticated_root">
             <Scene key="comp1" component={Comp1} title="Comp1" />
             <Scene key="comp2" component={Comp2} title="Comp2" />
           </Tabs>
-        ) : (
-          <Stack key="sign_in_root">
-            <Scene key="sign_in" component={Login} title="login" hideNavBar />
-          </Stack>
-        )}
+          <Scene
+            key="sign_in"
+            component={Login}
+            title="login"
+            hideNavBar
+            initial={!this.props.authenticated}
+          />
+        </Stack>
       </ConnectedRouter>
     )
   }

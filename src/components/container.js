@@ -6,7 +6,13 @@ export const Body = styled.View`
     props.backgroundColor ? props.backgroundColor : "#fff"};
   align-items: center;
   justify-content: center;
-  padding: 5px 30px;
+  padding: 30px 30px;
 `
 
-export const FormContainer = styled.View``
+export const ScrollView = styled.ScrollView``
+
+export const FormContainer = styled.View`
+  display: flex;
+  flex: 1;
+  flex-flow: column nowrap;
+`

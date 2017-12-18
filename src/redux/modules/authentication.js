@@ -1,5 +1,7 @@
 import { doFetch } from "./fetching"
 import { newError } from "./error"
+import { Actions } from "react-native-router-flux"
+import base64 from "../../utils/base64"
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
@@ -20,6 +22,10 @@ export default function authentication(state = initialState, action) {
         isAuthenticated: true,
         error: false,
         token: action.token,
+      }
+    case LOGOUT_SUCCESS:
+      return {
+        ...initialState,
       }
     case `${type}_FETCH_START`:
       return {
@@ -44,11 +50,7 @@ export default function authentication(state = initialState, action) {
    api Fetchs
  */
 function login(api, body) {
-  return new Promise(resolve => {
-    console.log("Creds send: ", body)
-    return resolve({ token: "jsonweb.eyJ1c2VySWQiOjF9.token" })
-  })
-  //return api.post("/session", body)
+  return api.post("/auth", body)
 }
 /*
   before Actions
@@ -60,23 +62,18 @@ export function loginUser(creds) {
       newError(dispatch, { e: response.error }, type)
     } else {
       const data = response.token.split(".")
-      const userInfo = JSON.parse(atob(data[1]))
-      dispatch(
-        receiveLogin(
-          {
-            userId: userInfo.userId,
-            role: "user",
-          },
-          response.token
-        )
-      )
+      const userInfo = JSON.parse(base64.atob(data[1]))
+      dispatch(receiveLogin(userInfo, response.token))
+      Actions.authenticated_root()
     }
   }
 }
 
 export function logoutUser() {
   return async dispatch => {
-    dispatch({ type: "CLEAR_STORE" })
+    Actions.sign_in()
+    // dispatch({ type: "CLEAR_STORE" })
+    dispatch({ type: LOGOUT_SUCCESS })
   }
 }
 
