@@ -26,4 +26,12 @@ const reducer = persistCombineReducers(config, {
   test,
 })
 
-export default reducer
+const rootReducer = (state, action) => {
+  if (action.type === "CLEAR_STORE") {
+    const { hydratation } = state
+    state = { hydratation }
+  }
+  return reducer(state, action)
+}
+
+export default rootReducer

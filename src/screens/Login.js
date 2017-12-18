@@ -1,9 +1,11 @@
 import React, { Component } from "react"
+import { FlatList } from "react-native"
 import PropType from "prop-types"
 import { connect } from "react-redux"
 import t from "tcomb-form-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 
-import { Body, FormContainer } from "../components/container"
+import { Body, FormContainer, ScrollView } from "../components/container"
 import { Title } from "../components/text"
 import { iconField, Button } from "../components/form"
 
@@ -21,6 +23,7 @@ const options = {
       config: { iconProps: { name: "ios-lock", type: "ionicon" } },
     },
     email: {
+      autoCapitalize: "none",
       template: iconField,
       config: { iconProps: { name: "ios-person", type: "ionicon" } },
     },
@@ -50,15 +53,17 @@ class LoginFormPresentational extends Component {
   }
   render = () => {
     return (
-      <FormContainer>
-        <Form
-          type={LoginFormStruct}
-          options={options}
-          value={this.state.value}
-          onChange={this.onChange}
-        />
-        <Button title="ENTRAR" onPress={this.handleSubmit} color="#00678A" />
-      </FormContainer>
+      <KeyboardAwareScrollView>
+        <FormContainer>
+          <Form
+            type={LoginFormStruct}
+            options={options}
+            value={this.state.value}
+            onChange={this.onChange}
+          />
+          <Button title="ENTRAR" onPress={this.handleSubmit} color="#00678A" />
+        </FormContainer>
+      </KeyboardAwareScrollView>
     )
   }
 }

@@ -1,5 +1,6 @@
 import { doFetch } from "./fetching"
 import { newError } from "./error"
+import { Actions } from "react-native-router-flux"
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
@@ -20,6 +21,10 @@ export default function authentication(state = initialState, action) {
         isAuthenticated: true,
         error: false,
         token: action.token,
+      }
+    case LOGOUT_SUCCESS:
+      return {
+        ...initialState,
       }
     case `${type}_FETCH_START`:
       return {
@@ -53,19 +58,21 @@ export function loginUser(creds) {
   return async (dispatch, getState, api) => {
     const response = await doFetch(dispatch, login(api.api, creds), type)
     if (response.error) {
-      console.log("ERROR HERE!!!!!!!! ###########")
       newError(dispatch, { e: response.error }, type)
     } else {
       const data = response.token.split(".")
       const userInfo = JSON.parse(atob(data[1]))
       dispatch(receiveLogin(userInfo, response.token))
+      Actions.authenticated_root()
     }
   }
 }
 
 export function logoutUser() {
   return async dispatch => {
-    dispatch({ type: "CLEAR_STORE" })
+    Actions.sign_in()
+    // dispatch({ type: "CLEAR_STORE" })
+    dispatch({ type: LOGOUT_SUCCESS })
   }
 }
 
