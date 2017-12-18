@@ -29,7 +29,7 @@ export default class Api {
     })
   }
   get = async (url, params) =>
-    this.request(this.generateInstance().get(url, { params }));
+    this.request(this.generateInstance().get(url, { params }))
   post = async (url, body) =>
     this.request(this.generateInstance().post(url, body))
   del = async url => this.request(this.generateInstance().delete(url))

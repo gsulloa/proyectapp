@@ -21,7 +21,13 @@ class Nav extends Component {
             <Scene key="comp1" component={Comp1} title="Comp1" />
             <Scene key="comp2" component={Comp2} title="Comp2" />
           </Tabs>
-          <Scene key="sign_in" component={Login} title="login" hideNavBar initial={!this.props.authenticated} />
+          <Scene
+            key="sign_in"
+            component={Login}
+            title="login"
+            hideNavBar
+            initial={!this.props.authenticated}
+          />
         </Stack>
       </ConnectedRouter>
     )

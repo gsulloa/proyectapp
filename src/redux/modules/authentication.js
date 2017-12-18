@@ -1,6 +1,7 @@
 import { doFetch } from "./fetching"
 import { newError } from "./error"
 import { Actions } from "react-native-router-flux"
+import base64 from "../../utils/base64"
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
@@ -61,7 +62,7 @@ export function loginUser(creds) {
       newError(dispatch, { e: response.error }, type)
     } else {
       const data = response.token.split(".")
-      const userInfo = JSON.parse(atob(data[1]))
+      const userInfo = JSON.parse(base64.atob(data[1]))
       dispatch(receiveLogin(userInfo, response.token))
       Actions.authenticated_root()
     }
