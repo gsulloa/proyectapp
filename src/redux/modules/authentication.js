@@ -44,11 +44,7 @@ export default function authentication(state = initialState, action) {
    api Fetchs
  */
 function login(api, body) {
-  return new Promise(resolve => {
-    console.log("Creds send: ", body)
-    return resolve({ token: "jsonweb.eyJ1c2VySWQiOjF9.token" })
-  })
-  //return api.post("/session", body)
+  return api.post("/auth", body)
 }
 /*
   before Actions
@@ -57,19 +53,12 @@ export function loginUser(creds) {
   return async (dispatch, getState, api) => {
     const response = await doFetch(dispatch, login(api.api, creds), type)
     if (response.error) {
+      console.log("ERROR HERE!!!!!!!! ###########")
       newError(dispatch, { e: response.error }, type)
     } else {
       const data = response.token.split(".")
       const userInfo = JSON.parse(atob(data[1]))
-      dispatch(
-        receiveLogin(
-          {
-            userId: userInfo.userId,
-            role: "user",
-          },
-          response.token
-        )
-      )
+      dispatch(receiveLogin(userInfo, response.token))
     }
   }
 }

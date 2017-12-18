@@ -1,11 +1,14 @@
 import React, { Component } from "react"
+import PropType from "prop-types"
 import { connect } from "react-redux"
+import t from "tcomb-form-native"
 
 import { Body, FormContainer } from "../components/container"
 import { Title } from "../components/text"
 import { iconField, Button } from "../components/form"
 
-import t from "tcomb-form-native"
+import { loginUser } from "../redux/modules/authentication"
+
 const LoginFormStruct = t.struct({
   email: t.String,
   password: t.String,
@@ -25,7 +28,14 @@ const options = {
 }
 const Form = t.form.Form
 
-class LoginForm extends Component {
+const mapDispatchToProps = dispatch => ({
+  login: creds => dispatch(loginUser(creds)),
+})
+
+class LoginFormPresentational extends Component {
+  static propTypes = {
+    login: PropType.func.isRequired,
+  }
   state = {
     value: {
       email: "",
@@ -36,7 +46,7 @@ class LoginForm extends Component {
     this.setState({ value })
   }
   handleSubmit = () => {
-    console.log(this.state)
+    this.props.login(this.state.value)
   }
   render = () => {
     return (
@@ -52,6 +62,8 @@ class LoginForm extends Component {
     )
   }
 }
+
+const LoginForm = connect(null, mapDispatchToProps)(LoginFormPresentational)
 
 class Login extends Component {
   render = () => {
