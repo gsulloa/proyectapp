@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import { FlatList } from "react-native"
 import PropType from "prop-types"
 import { connect } from "react-redux"
 import t from "tcomb-form-native"

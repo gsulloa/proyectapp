@@ -10,20 +10,10 @@ const config = {
   storage,
 }
 
-function test(state = 0, action) {
-  switch (action.type) {
-    case "INCREMENT":
-      return state + 1
-    default:
-      return state
-  }
-}
-
 const reducer = persistCombineReducers(config, {
   hydratation,
   routes,
   authentication,
-  test,
 })
 
 const rootReducer = (state, action) => {
