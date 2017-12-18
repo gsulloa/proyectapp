@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import t from "tcomb-form-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 
-import { Body, FormContainer, ScrollView } from "../components/container"
+import { Body, FormContainer } from "../components/container"
 import { Title } from "../components/text"
 import { iconField, Button } from "../components/form"
 
@@ -26,6 +26,7 @@ const options = {
       autoCapitalize: "none",
       template: iconField,
       config: { iconProps: { name: "ios-person", type: "ionicon" } },
+      keyboardType: "email-address",
     },
   },
 }
