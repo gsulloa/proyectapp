@@ -16,11 +16,8 @@ const reducer = persistCombineReducers(config, {
   hydratation,
   routes,
   authentication,
-<<<<<<< HEAD
-=======
   community,
   witchMail,
->>>>>>> 540de49b855d7002c6af367b4a71718ff8fda55b
 })
 
 const rootReducer = (state, action) => {
