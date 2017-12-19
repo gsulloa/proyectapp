@@ -64,7 +64,7 @@ export function loginUser(creds) {
       const data = response.token.split(".")
       const userInfo = JSON.parse(base64.atob(data[1]))
       dispatch(receiveLogin(userInfo, response.token))
-      Actions.authenticated_root()
+      Actions.authenticatedRoot()
     }
   }
 }
