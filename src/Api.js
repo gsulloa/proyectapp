@@ -2,8 +2,9 @@ import { devlog } from "./utils/log"
 import axios from "axios"
 
 export default class Api {
-  constructor(baseUrl) {
+  constructor(baseUrl, token) {
     this.baseUrl = baseUrl
+    this.token = token
   }
   request = async request => {
     try {
@@ -18,9 +19,14 @@ export default class Api {
     }
   }
 
+  withToken(token) {
+    return new Api(this.baseUrl, token)
+  }
+
   url = url => `${this.baseUrl}${url}`
   generateHeader = () => ({
     "Content-Type": "application/json",
+    Authorization: this.token ? `Bearer ${this.token}` : undefined,
   })
   generateInstance = () => {
     return axios.create({

@@ -4,6 +4,8 @@ import storage from "redux-persist/es/storage" // default: AsyncStorage
 import hydratation from "./modules/hydratation"
 import routes from "./modules/routes"
 import authentication from "./modules/authentication"
+import community from "./modules/community"
+import witchMail from "./modules/witchMail"
 
 const config = {
   key: "root",
@@ -14,6 +16,11 @@ const reducer = persistCombineReducers(config, {
   hydratation,
   routes,
   authentication,
+<<<<<<< HEAD
+=======
+  community,
+  witchMail,
+>>>>>>> 540de49b855d7002c6af367b4a71718ff8fda55b
 })
 
 const rootReducer = (state, action) => {
