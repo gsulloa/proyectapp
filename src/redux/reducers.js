@@ -6,6 +6,8 @@ import routes from "./modules/routes"
 import authentication from "./modules/authentication"
 import community from "./modules/community"
 import witchMail from "./modules/witchMail"
+import manual from "./modules/manual"
+import section from "./modules/section"
 
 const config = {
   key: "root",
@@ -18,6 +20,8 @@ const reducer = persistCombineReducers(config, {
   authentication,
   community,
   witchMail,
+  manual,
+  section,
 })
 
 const rootReducer = (state, action) => {

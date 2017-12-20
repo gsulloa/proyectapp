@@ -12,6 +12,8 @@ import { WITCH_MAIL_COLOR } from "./components/colors"
 import WitchMailCreate from "./screens/witchMail/WitchMailCreate"
 import WitchMailBox from "./screens/witchMail/WitchMailBox"
 import WitchMailShow from "./screens/witchMail/WitchMailShow"
+import Reports from "./screens/reports/Reports"
+import ReportsCreate from "./screens/reports/ReportsCreate"
 
 const ConnectedRouter = connect()(Router)
 
@@ -30,6 +32,10 @@ class Nav extends Component {
             activeTintColor="white"
             inactiveTintColor="white"
           >
+            <Stack key="reports" icon={() => <Icon name="report" />}>
+              <Scene key="reportsIndex" component={Reports} />
+              <Scene key="reportsCreate" component={ReportsCreate} />
+            </Stack>
             <Stack
               key="witchMail"
               icon={() => <Icon name="ios-mail" type="ionicon" />}
