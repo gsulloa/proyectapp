@@ -14,6 +14,8 @@ import WitchMailBox from "./screens/witchMail/WitchMailBox"
 import WitchMailShow from "./screens/witchMail/WitchMailShow"
 import Reports from "./screens/reports/Reports"
 import ReportsCreate from "./screens/reports/ReportsCreate"
+import Calendar from "./screens/calendar/Calendar"
+import EventCreate from "./screens/calendar/EventCreate"
 
 const ConnectedRouter = connect()(Router)
 
@@ -35,6 +37,13 @@ class Nav extends Component {
             <Stack key="reports" icon={() => <Icon name="report" />}>
               <Scene key="reportsIndex" component={Reports} />
               <Scene key="reportsCreate" component={ReportsCreate} />
+            </Stack>
+            <Stack
+              key="calendar"
+              icon={() => <Icon name="calendar" type="font-awesome" />}
+            >
+              <Scene key="calendarIndex" component={Calendar} />
+              <Scene key="eventCreate" component={EventCreate} />
             </Stack>
             <Stack
               key="witchMail"

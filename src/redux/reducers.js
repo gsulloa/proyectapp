@@ -8,6 +8,7 @@ import community from "./modules/community"
 import witchMail from "./modules/witchMail"
 import manual from "./modules/manual"
 import section from "./modules/section"
+import event from "./modules/event"
 
 const config = {
   key: "root",
@@ -22,6 +23,7 @@ const reducer = persistCombineReducers(config, {
   witchMail,
   manual,
   section,
+  event,
 })
 
 const rootReducer = (state, action) => {

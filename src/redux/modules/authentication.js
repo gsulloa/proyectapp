@@ -71,7 +71,7 @@ export function loginUser(creds) {
 
 export function logoutUser() {
   return async dispatch => {
-    Actions.sign_in()
+    Actions.signIn()
     // dispatch({ type: "CLEAR_STORE" })
     dispatch({ type: LOGOUT_SUCCESS })
   }

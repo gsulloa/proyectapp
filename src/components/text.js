@@ -9,3 +9,7 @@ export const Title = styled.Text`
 export const Text = styled.Text`
   color: ${props => (props.color ? props.color : "black")};
 `
+
+export const CenterText = styled(Text)`
+  text-align: center;
+`

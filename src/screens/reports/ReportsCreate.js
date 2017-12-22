@@ -9,7 +9,7 @@ import { Button } from "../../components/form"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 import { devlog } from "../../utils/log"
 import { getSections } from "../../redux/modules/section"
-import { newReport } from "../../redux/modules/report";
+import { newReport } from "../../redux/modules/report"
 
 const Form = t.form.Form
 const ReportsFormStructGenerator = sections =>
@@ -39,7 +39,7 @@ const initialValues = {
   content: "",
 }
 
-class WitchMailCreate extends Component {
+class ReportsCreate extends Component {
   static propTypes = {
     manualId: PropTypes.number.isRequired,
     sections: PropTypes.array.isRequired,
@@ -93,4 +93,4 @@ class WitchMailCreate extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WitchMailCreate)
+export default connect(mapStateToProps, mapDispatchToProps)(ReportsCreate)
