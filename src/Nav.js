@@ -2,12 +2,13 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Icon } from "react-native-elements"
+import DrawerComponent from "./components/DrawerComponent"
 
 import WitchMailIndex from "./screens/witchMail/WitchMailIndex"
 
 import Login from "./screens/Login"
 
-import { Scene, Router, Tabs, Stack } from "react-native-router-flux"
+import { Scene, Router, Tabs, Stack, Drawer } from "react-native-router-flux"
 import { WITCH_MAIL_COLOR } from "./components/colors"
 import WitchMailCreate from "./screens/witchMail/WitchMailCreate"
 import WitchMailBox from "./screens/witchMail/WitchMailBox"
@@ -27,34 +28,34 @@ class Nav extends Component {
     return (
       <ConnectedRouter>
         <Stack key="root">
-          <Tabs
-            key="authenticatedRoot"
-            hideNavBar
-            activeBackgroundColor={WITCH_MAIL_COLOR}
-            activeTintColor="white"
-            inactiveTintColor="white"
-          >
-            <Stack key="reports" icon={() => <Icon name="report" />}>
-              <Scene key="reportsIndex" component={Reports} />
-              <Scene key="reportsCreate" component={ReportsCreate} />
-            </Stack>
-            <Stack
-              key="calendar"
-              icon={() => <Icon name="calendar" type="font-awesome" />}
+          <Drawer key="drawer" contentComponent={DrawerComponent}>
+            <Tabs
+              hideNavBar
+              key="authenticatedRoot"
+              activeBackgroundColor={WITCH_MAIL_COLOR}
             >
-              <Scene key="calendarIndex" component={Calendar} />
-              <Scene key="eventCreate" component={EventCreate} />
-            </Stack>
-            <Stack
-              key="witchMail"
-              icon={() => <Icon name="ios-mail" type="ionicon" />}
-            >
-              <Scene key="witchMailIndex" component={WitchMailIndex} />
-              <Scene key="witchMailShow" component={WitchMailShow} />
-              <Scene key="witchMailCreate" component={WitchMailCreate} />
-              <Scene key="witchMailBox" component={WitchMailBox} />
-            </Stack>
-          </Tabs>
+              <Stack key="reports" icon={() => <Icon name="report" />}>
+                <Scene key="reportsIndex" component={Reports} />
+                <Scene key="reportsCreate" component={ReportsCreate} back />
+              </Stack>
+              <Stack
+                key="calendar"
+                icon={() => <Icon name="calendar" type="font-awesome" />}
+              >
+                <Scene key="calendarIndex" component={Calendar} />
+                <Scene key="eventCreate" component={EventCreate} back />
+              </Stack>
+              <Stack
+                key="witchMail"
+                icon={() => <Icon name="ios-mail" type="ionicon" />}
+              >
+                <Scene key="witchMailIndex" component={WitchMailIndex} />
+                <Scene key="witchMailShow" component={WitchMailShow} back />
+                <Scene key="witchMailCreate" component={WitchMailCreate} back />
+                <Scene key="witchMailBox" component={WitchMailBox} back />
+              </Stack>
+            </Tabs>
+          </Drawer>
           <Scene
             key="signIn"
             component={Login}

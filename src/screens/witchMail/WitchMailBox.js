@@ -26,9 +26,6 @@ class WitchMailIndex extends Component {
   static defaultProps = {
     witchMails: [],
   }
-  static navigationOptions = {
-    title: "Bandeja de Entrada",
-  }
   filterWitchMails = () => {
     return _.filter(this.props.witchMails, witchMail => !witchMail.seen)
   }
