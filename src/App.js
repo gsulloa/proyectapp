@@ -1,11 +1,19 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { StatusBar } from "react-native"
 import { Provider, connect } from "react-redux"
+import styled from "styled-components/native"
 
 import { hydrate } from "./redux/modules/hydratation"
 import { devlog } from "./utils/log"
 
 import Nav from "./Nav"
+
+const Screen = styled.View`
+  flex: 1;
+  width: 100%;
+  height: 100%;
+`
 
 const mapStateToProps = state => ({
   hydratation: state.hydratation,
@@ -34,9 +42,12 @@ export class App extends Component {
       return null
     }
     return (
-      <Provider store={this.props.store}>
-        <Nav />
-      </Provider>
+      <Screen>
+        <StatusBar hidden />
+        <Provider store={this.props.store}>
+          <Nav />
+        </Provider>
+      </Screen>
     )
   }
 }
