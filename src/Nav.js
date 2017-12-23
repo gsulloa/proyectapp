@@ -22,7 +22,14 @@ import { Button } from "react-native"
 const ConnectedRouter = connect()(Router)
 
 const Er = () => {
-  return <Button onPress={() => {throw new Error("throwing error")}} title="error!" />
+  return (
+    <Button
+      onPress={() => {
+        throw new Error("throwing error")
+      }}
+      title="error!"
+    />
+  )
 }
 
 class Nav extends Component {
@@ -39,13 +46,18 @@ class Nav extends Component {
               key="authenticatedRoot"
               activeBackgroundColor={WITCH_MAIL_COLOR}
             >
-              <Stack key="reports" icon={() => <Icon name="report" />}>
+              <Stack
+                key="reports"
+                icon={() => <Icon name="report" />}
+                title="Reportes"
+              >
                 <Scene key="reportsIndex" component={Reports} />
                 <Scene key="reportsCreate" component={ReportsCreate} back />
               </Stack>
               <Stack
                 key="calendar"
                 icon={() => <Icon name="calendar" type="font-awesome" />}
+                title="Calendario"
               >
                 <Scene key="calendarIndex" component={Calendar} />
                 <Scene key="eventCreate" component={EventCreate} back />
@@ -53,6 +65,7 @@ class Nav extends Component {
               <Stack
                 key="witchMail"
                 icon={() => <Icon name="ios-mail" type="ionicon" />}
+                title="Correo de Brujas"
               >
                 <Scene key="witchMailIndex" component={WitchMailIndex} />
                 <Scene key="witchMailShow" component={WitchMailShow} back />
