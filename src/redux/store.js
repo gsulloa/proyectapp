@@ -22,10 +22,9 @@ export default function configureStore(initialState = {}, { api } = {}) {
     middleware.push(logger)
   }
   if (shouldReport) {
-    Raven.config(
-      "https://c2515f085c084ab7b7e5cc5cf07e0fef:1d55699e13154d5c9af64446a55404c3@sentry.io/263323",
-      { allowSecretKey: true }
-    ).install()
+    Raven.config(process.env.REAC_NATIVE_APP_SENTRY_URL, {
+      allowSecretKey: true,
+    }).install()
     middleware.push(createRavenMiddleware(Raven, {}))
   }
 

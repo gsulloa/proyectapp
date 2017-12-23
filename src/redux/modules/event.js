@@ -63,6 +63,9 @@ function setEvents(events) {
 function fetchEvents(api) {
   return api.get("/event")
 }
+function fetchAllEvents(api) {
+  return api.get("/event/all")
+}
 
 function createEvent(api, data) {
   return api.post("/event", data)
@@ -70,9 +73,15 @@ function createEvent(api, data) {
 
 export function getEvents() {
   return async (dispatch, getState, api) => {
+    let fetchFunction
+    if (getState().authentication.data.isAdmin) {
+      fetchFunction = fetchAllEvents
+    } else {
+      fetchFunction = fetchEvents
+    }
     const response = await doFetch(
       dispatch,
-      fetchEvents(api.api.withToken(getState().authentication.token)),
+      fetchFunction(api.api.withToken(getState().authentication.token)),
       type
     )
     if (response.error) {

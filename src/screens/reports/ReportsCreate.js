@@ -19,7 +19,11 @@ const ReportsFormStructGenerator = sections =>
   })
 
 const options = {
-  fields: {},
+  fields: {
+    content: {
+      multiline: true,
+    },
+  },
 }
 
 const mapStateToProps = (state, ownProps) => {

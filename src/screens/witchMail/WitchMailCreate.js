@@ -19,7 +19,11 @@ const WitchMailFormStructGenerator = communities =>
   })
 
 const options = {
-  fields: {},
+  fields: {
+    content: {
+      multiline: true,
+    },
+  },
 }
 
 const mapStateToProps = state => {

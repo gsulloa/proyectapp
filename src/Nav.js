@@ -17,20 +17,8 @@ import Reports from "./screens/reports/Reports"
 import ReportsCreate from "./screens/reports/ReportsCreate"
 import Calendar from "./screens/calendar/Calendar"
 import EventCreate from "./screens/calendar/EventCreate"
-import { Button } from "react-native"
 
 const ConnectedRouter = connect()(Router)
-
-const Er = () => {
-  return (
-    <Button
-      onPress={() => {
-        throw new Error("throwing error")
-      }}
-      title="error!"
-    />
-  )
-}
 
 class Nav extends Component {
   static propTypes = {
@@ -72,7 +60,6 @@ class Nav extends Component {
                 <Scene key="witchMailCreate" component={WitchMailCreate} back />
                 <Scene key="witchMailBox" component={WitchMailBox} back />
               </Stack>
-              <Scene key="error" component={Er} />
             </Tabs>
           </Drawer>
           <Scene

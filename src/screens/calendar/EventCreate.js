@@ -10,17 +10,27 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { devlog } from "../../utils/log"
 
 import { newEvent } from "../../redux/modules/event"
+import { Platform } from "react-native"
 
 const Form = t.form.Form
 const EventFormStruct = t.struct({
   name: t.String,
   description: t.String,
-  start: t.Date,
+  start: t.String,
 })
 
 const options = {
-  fields: {},
+  fields: {
+    start: {},
+    description: {
+      multiline: true,
+    },
+  },
 }
+
+// if (Platform.OS === "android") {
+//   options.fields.start = { dialogMode: "calendar" }
+// }
 
 const mapDispatchToProps = dispatch => ({
   newEvent: data => dispatch(newEvent(data)),
@@ -29,7 +39,7 @@ const mapDispatchToProps = dispatch => ({
 const initialValues = {
   name: "",
   description: "",
-  start: new Date(),
+  start: new Date().toISOString(),
 }
 
 class EventCreate extends Component {
@@ -47,10 +57,10 @@ class EventCreate extends Component {
     this.setState({ value })
   }
   handleSubmit = () => {
+    this.props.newEvent(this.state.value)
     this.setState({
       value: initialValues,
     })
-    this.props.newEvent(this.state.value)
   }
   render = () => {
     devlog("EventCreate", this.props)

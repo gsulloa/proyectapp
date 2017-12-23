@@ -69,7 +69,9 @@ export function loginUser(creds) {
             ...userInfo,
             isAdmin: response.user.isAdmin,
             name: response.user.name,
-            communityId: response.voluntary.communityId,
+            communityId: response.voluntary
+              ? response.voluntary.communityId
+              : undefined,
           },
           response.token
         )
