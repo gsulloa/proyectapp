@@ -7,7 +7,7 @@ import { devlog } from "./src/utils/log"
 
 // const history = createHistory()
 const api = new Api(
-  process.env.REACT_APP_API ||
+  process.env.REACT_NATIVE_APP_API ||
     `http://${process.env.REACT_NATIVE_APP_IP_ADDRESS}:3000`
 )
 

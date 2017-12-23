@@ -63,7 +63,17 @@ export function loginUser(creds) {
     } else {
       const data = response.token.split(".")
       const userInfo = JSON.parse(base64.atob(data[1]))
-      dispatch(receiveLogin(userInfo, response.token))
+      dispatch(
+        receiveLogin(
+          {
+            ...userInfo,
+            isAdmin: response.user.isAdmin,
+            name: response.user.name,
+            communityId: response.voluntary.communityId,
+          },
+          response.token
+        )
+      )
       Actions.authenticatedRoot()
     }
   }
@@ -71,9 +81,9 @@ export function loginUser(creds) {
 
 export function logoutUser() {
   return async dispatch => {
-    Actions.signIn()
     // dispatch({ type: "CLEAR_STORE" })
     dispatch({ type: LOGOUT_SUCCESS })
+    Actions.signIn()
   }
 }
 

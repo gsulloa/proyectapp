@@ -27,7 +27,7 @@ class Nav extends Component {
   render = () => {
     return (
       <ConnectedRouter>
-        <Stack key="root">
+        <Stack key="root" hideNavBar>
           <Drawer key="drawer" contentComponent={DrawerComponent}>
             <Tabs
               hideNavBar
@@ -60,7 +60,6 @@ class Nav extends Component {
             key="signIn"
             component={Login}
             title="login"
-            hideNavBar
             initial={!this.props.authenticated}
           />
         </Stack>
