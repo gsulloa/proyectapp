@@ -4,6 +4,11 @@ import App from "./src/App"
 import Api from "./src/Api"
 import configureStore from "./src/redux/store"
 import { devlog } from "./src/utils/log"
+import errorHandler from "./src/utils/errorHandler"
+import { setJSExceptionHandler } from "react-native-exception-handler"
+
+setJSExceptionHandler(errorHandler, true)
+// setNativeExceptionHandler(errorHandler)
 
 // const history = createHistory()
 const api = new Api(
