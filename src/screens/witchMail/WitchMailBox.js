@@ -12,6 +12,7 @@ import { getWitchMails } from "../../redux/modules/witchMail"
 
 const mapStateToProps = state => ({
   witchMails: state.witchMail.data,
+  communities: state.community.data,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -22,9 +23,11 @@ class WitchMailIndex extends Component {
   static propTypes = {
     getWitchMails: PropTypes.func.isRequired,
     witchMails: PropTypes.array.isRequired,
+    communities: PropTypes.array.isRequired,
   }
   static defaultProps = {
     witchMails: [],
+    communities: [],
   }
   filterWitchMails = () => {
     return _.filter(this.props.witchMails, witchMail => !witchMail.seen)
@@ -36,7 +39,15 @@ class WitchMailIndex extends Component {
     const filteredWitchMails = this.filterWitchMails()
     if (filteredWitchMails.length) {
       const witchMail = _.shuffle(filteredWitchMails)[0]
-      Actions.witchMailShow({ witchMail })
+      const community = this.props.communities.find(
+        c => c.id === witchMail.senderId
+      )
+      Actions.witchMailShow({
+        witchMail: {
+          ...witchMail,
+          community: community ? community.name : witchMail.senderId,
+        },
+      })
     }
   }
   render = () => {

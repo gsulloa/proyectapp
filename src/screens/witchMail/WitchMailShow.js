@@ -19,6 +19,7 @@ class WitchMailShow extends Component {
     witchMail: PropTypes.shape({
       content: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
+      community: PropTypes.string,
     }).isRequired,
     setRead: PropTypes.func.isRequired,
   }
@@ -36,6 +37,7 @@ class WitchMailShow extends Component {
     return (
       <Body backgroundColor={WITCH_MAIL_COLOR}>
         <Text>{this.props.witchMail.content}</Text>
+        <Text>Enviado por comunidad {this.props.witchMail.community}</Text>
         <Icon
           reverse
           name="check"
