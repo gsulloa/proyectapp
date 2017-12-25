@@ -11,26 +11,25 @@ import { devlog } from "../../utils/log"
 
 import { newEvent } from "../../redux/modules/event"
 import { Platform } from "react-native"
+import { getDate } from "../../utils/datetime"
 
 const Form = t.form.Form
 const EventFormStruct = t.struct({
   name: t.String,
   description: t.String,
-  start: t.String,
+  start: t.Date,
 })
 
 const options = {
   fields: {
-    start: {},
+    start: {
+      mode: "datetime",
+    },
     description: {
       multiline: true,
     },
   },
 }
-
-// if (Platform.OS === "android") {
-//   options.fields.start = { dialogMode: "calendar" }
-// }
 
 const mapDispatchToProps = dispatch => ({
   newEvent: data => dispatch(newEvent(data)),
@@ -39,7 +38,7 @@ const mapDispatchToProps = dispatch => ({
 const initialValues = {
   name: "",
   description: "",
-  start: new Date().toISOString(),
+  start: new Date(),
 }
 
 class EventCreate extends Component {
