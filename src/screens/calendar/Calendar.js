@@ -5,7 +5,6 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { Agenda } from "../../components/calendar"
 
-import { Title } from "../../components/text"
 import { Body } from "../../components/container"
 import { CALENDAR_COLOR } from "../../components/colors"
 
@@ -16,6 +15,7 @@ import { getCommunities } from "../../redux/modules/community"
 const mapStateToProps = state => ({
   communities: state.community.data,
   events: state.event.data,
+  fetching: state.event.fetching || state.community.fetching,
 })
 const mapDispatchToProps = dispatch => ({
   getEvents: () => dispatch(getEvents()),
@@ -28,6 +28,7 @@ class Calendar extends Component {
     communities: PropTypes.array.isRequired,
     getEvents: PropTypes.func.isRequired,
     getCommunities: PropTypes.func.isRequired,
+    fetching: PropTypes.bool.isRequired,
   }
   static defaultProps = {
     events: [],
@@ -54,15 +55,16 @@ class Calendar extends Component {
     })
     return items
   }
-  componentWillMount = () => {
+  componentWillMount = async () => {
+    await this.props.getCommunities()
     this.props.getEvents()
-    this.props.getCommunities()
   }
   handleNewEvent = () => {
     Actions.eventCreate()
   }
   render = () => {
     devlog("Calendar", this.props)
+    if (this.props.fetching) return <Body />
     return (
       <Body backgroundColor={CALENDAR_COLOR.background}>
         <Agenda

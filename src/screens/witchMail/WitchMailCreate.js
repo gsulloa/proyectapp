@@ -5,8 +5,6 @@ import t from "tcomb-form-native"
 
 import { Body } from "../../components/container"
 import { WITCH_MAIL_COLOR } from "../../components/colors"
-import { Title } from "../../components/text"
-import { getCommunities } from "../../redux/modules/community"
 import { Button } from "../../components/form"
 import { newWitchMail } from "../../redux/modules/witchMail"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
@@ -32,7 +30,6 @@ const mapStateToProps = state => {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  getCommunities: () => dispatch(getCommunities()),
   newWitchMail: data => dispatch(newWitchMail(data)),
 })
 
@@ -44,7 +41,6 @@ const initialValues = {
 class WitchMailCreate extends Component {
   static propTypes = {
     communities: PropTypes.array.isRequired,
-    getCommunities: PropTypes.func.isRequired,
     newWitchMail: PropTypes.func.isRequired,
   }
   static defaultProps = {
@@ -52,9 +48,6 @@ class WitchMailCreate extends Component {
   }
   state = {
     value: initialValues,
-  }
-  componentWillMount = () => {
-    this.props.getCommunities()
   }
   onChange = value => {
     this.setState({ value })

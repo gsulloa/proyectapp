@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 
-import { Title } from "../../components/text"
 import { Body } from "../../components/container"
 import { REPORTS_COLOR } from "../../components/colors"
 import { Button } from "../../components/form"
@@ -33,7 +32,6 @@ class Reports extends Component {
     devlog("Reports", this.props)
     return (
       <Body backgroundColor={REPORTS_COLOR.background}>
-        <Title color={REPORTS_COLOR.color}>Reportes de Manuales</Title>
         {this.props.manuals.map(manual => {
           return (
             <Button

@@ -3,7 +3,7 @@ import { Actions } from "react-native-router-flux"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 
-import { Title, Text } from "../../components/text"
+import { Text } from "../../components/text"
 import { Body } from "../../components/container"
 import { WITCH_MAIL_COLOR } from "../../components/colors"
 import { devlog } from "../../utils/log"

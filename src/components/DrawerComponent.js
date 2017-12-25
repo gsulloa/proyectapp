@@ -37,7 +37,7 @@ class DrawerContent extends React.Component {
     logout: PropTypes.func,
     name: PropTypes.string,
     email: PropTypes.string,
-    community: PropTypes.string,
+    community: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }
 
   static contextTypes = {

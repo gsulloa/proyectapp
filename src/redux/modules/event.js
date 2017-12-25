@@ -50,7 +50,6 @@ function setEvents(events) {
     type: SET_EVENTS,
     payload: {
       data: events.map(event => ({
-        community: "NONE",
         ...event,
         title: event.name,
         date: getDate(event.start),
