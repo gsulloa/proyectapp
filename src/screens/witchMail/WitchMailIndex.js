@@ -8,16 +8,18 @@ import { Actions } from "react-native-router-flux"
 class WitchMailIndex extends Component {
   render = () => {
     return (
-      <Body backgroundColor={WITCH_MAIL_COLOR}>
+      <Body backgroundColor={WITCH_MAIL_COLOR.background}>
         <Button
           title="ESCRIBIR CORREO"
           onPress={() => Actions.witchMailCreate()}
-          color="#00678A"
+          color={WITCH_MAIL_COLOR.input.color}
+          backgroundColor={WITCH_MAIL_COLOR.input.background}
         />
         <Button
           title="BANDEJA DE ENTRADA"
           onPress={() => Actions.witchMailBox()}
-          color="#00678A"
+          color={WITCH_MAIL_COLOR.input.color}
+          backgroundColor={WITCH_MAIL_COLOR.input.background}
         />
       </Body>
     )

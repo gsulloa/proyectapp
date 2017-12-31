@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import _ from "lodash/collection"
 
-import { Title, Text } from "../../components/text"
+import { Text } from "../../components/text"
 import { Body } from "../../components/container"
 import { WITCH_MAIL_COLOR } from "../../components/colors"
 import { Button } from "../../components/form"
@@ -53,7 +53,7 @@ class WitchMailIndex extends Component {
   render = () => {
     const witchMailsRemaining = this.filterWitchMails().length
     return (
-      <Body backgroundColor={WITCH_MAIL_COLOR}>
+      <Body backgroundColor={WITCH_MAIL_COLOR.background}>
         {witchMailsRemaining
           ? [
               <Text key="countInfo">
@@ -67,14 +67,16 @@ class WitchMailIndex extends Component {
                 key="readButton"
                 title="LEER UNO"
                 onPress={this.readMail}
-                color="#00678A"
+                color={WITCH_MAIL_COLOR.input.color}
+                backgroundColor={WITCH_MAIL_COLOR.input.background}
               />,
             ]
           : undefined}
         <Button
           title="DESCARGAR CORREOS"
           onPress={this.downloadMails}
-          color="#00678A"
+          color={WITCH_MAIL_COLOR.input.color}
+          backgroundColor={WITCH_MAIL_COLOR.input.background}
         />
       </Body>
     )

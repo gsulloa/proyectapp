@@ -1,5 +1,4 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React from "react"
 import { Agenda as RNAgenda } from "react-native-calendars"
 
 import { CenterText, Text } from "./text"

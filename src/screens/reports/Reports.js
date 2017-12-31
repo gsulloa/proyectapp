@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 
-import { Body } from "../../components/container"
+import { ScrollBody } from "../../components/container"
 import { REPORTS_COLOR } from "../../components/colors"
 import { Button } from "../../components/form"
 import { Actions } from "react-native-router-flux"
@@ -31,18 +31,21 @@ class Reports extends Component {
   render = () => {
     devlog("Reports", this.props)
     return (
-      <Body backgroundColor={REPORTS_COLOR.background}>
+      <ScrollBody backgroundColor={REPORTS_COLOR.background}>
         {this.props.manuals.map(manual => {
           return (
             <Button
               key={manual.id}
               title={manual.name.toUpperCase()}
               onPress={() => Actions.reportsCreate({ manualId: manual.id })}
-              color={REPORTS_COLOR.color}
+              color={REPORTS_COLOR.input.color}
+              backgroundColor={REPORTS_COLOR.input.background}
+              icon={{ name: "account-circle" }}
+              center
             />
           )
         })}
-      </Body>
+      </ScrollBody>
     )
   }
 }

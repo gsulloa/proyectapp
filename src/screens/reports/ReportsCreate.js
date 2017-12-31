@@ -10,6 +10,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { devlog } from "../../utils/log"
 import { getSections } from "../../redux/modules/section"
 import { newReport } from "../../redux/modules/report"
+import textField from "../../components/form/textField"
+import selectField from "../../components/form/selectField"
 
 const Form = t.form.Form
 const ReportsFormStructGenerator = sections =>
@@ -22,6 +24,23 @@ const options = {
   fields: {
     content: {
       multiline: true,
+      template: textField,
+      numberOfLines: 7,
+      config: {
+        color: {
+          container: REPORTS_COLOR.input.background,
+          text: REPORTS_COLOR.input.color,
+        },
+      },
+    },
+    section: {
+      template: selectField,
+      config: {
+        color: {
+          container: REPORTS_COLOR.input.background,
+          text: REPORTS_COLOR.input.color,
+        },
+      },
     },
   },
 }
@@ -89,7 +108,8 @@ class ReportsCreate extends Component {
           <Button
             title="ENVIAR"
             onPress={this.handleSubmit}
-            color={REPORTS_COLOR.color}
+            color={REPORTS_COLOR.input.color}
+            backgroundColor={REPORTS_COLOR.input.background}
           />
         </KeyboardAwareScrollView>
       </Body>

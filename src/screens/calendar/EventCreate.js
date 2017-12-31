@@ -10,8 +10,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { devlog } from "../../utils/log"
 
 import { newEvent } from "../../redux/modules/event"
-import { Platform } from "react-native"
-import { getDate } from "../../utils/datetime"
+import textField from "../../components/form/textField"
+import datepickerField from "../../components/form/datepickerField"
 
 const Form = t.form.Form
 const EventFormStruct = t.struct({
@@ -22,11 +22,37 @@ const EventFormStruct = t.struct({
 
 const options = {
   fields: {
-    start: {
-      mode: "datetime",
+    name: {
+      returnKeyType: "next",
+      template: textField,
+      config: {
+        color: {
+          container: CALENDAR_COLOR.input.background,
+          text: CALENDAR_COLOR.input.color,
+        },
+      },
     },
     description: {
+      returnKeyType: "next",
       multiline: true,
+      template: textField,
+      numberOfLines: 7,
+      config: {
+        color: {
+          container: CALENDAR_COLOR.input.background,
+          text: CALENDAR_COLOR.input.color,
+        },
+      },
+    },
+    start: {
+      mode: "datetime",
+      template: datepickerField,
+      config: {
+        color: {
+          container: CALENDAR_COLOR.input.background,
+          text: CALENDAR_COLOR.input.color,
+        },
+      },
     },
   },
 }
@@ -75,7 +101,8 @@ class EventCreate extends Component {
           <Button
             title="ENVIAR"
             onPress={this.handleSubmit}
-            color={CALENDAR_COLOR.container}
+            color={CALENDAR_COLOR.input.color}
+            backgroundColor={CALENDAR_COLOR.input.background}
           />
         </KeyboardAwareScrollView>
       </Body>

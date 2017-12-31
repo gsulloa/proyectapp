@@ -4,9 +4,11 @@ import { connect } from "react-redux"
 import t from "tcomb-form-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 
+import { LOGIN_COLOR } from "../components/colors"
 import { Body, FormContainer } from "../components/container"
 import { Title } from "../components/text"
-import { iconField, Button } from "../components/form"
+import { Button } from "../components/form"
+import textField from "../components/form/textField"
 
 import { loginUser } from "../redux/modules/authentication"
 
@@ -18,14 +20,26 @@ const options = {
   fields: {
     password: {
       secureTextEntry: true,
-      template: iconField,
-      config: { iconProps: { name: "ios-lock", type: "ionicon" } },
+      template: textField,
+      config: {
+        iconProps: { name: "ios-lock", type: "ionicon" },
+        color: {
+          container: LOGIN_COLOR.input.background,
+          text: LOGIN_COLOR.input.color,
+        },
+      },
     },
     email: {
       autoCapitalize: "none",
-      template: iconField,
-      config: { iconProps: { name: "ios-person", type: "ionicon" } },
+      template: textField,
       keyboardType: "email-address",
+      config: {
+        iconProps: { name: "ios-person", type: "ionicon" },
+        color: {
+          container: LOGIN_COLOR.input.background,
+          text: LOGIN_COLOR.input.color,
+        },
+      },
     },
   },
 }
@@ -61,7 +75,12 @@ class LoginFormPresentational extends Component {
             value={this.state.value}
             onChange={this.onChange}
           />
-          <Button title="ENTRAR" onPress={this.handleSubmit} color="#00678A" />
+          <Button
+            title="ENTRAR"
+            onPress={this.handleSubmit}
+            color={LOGIN_COLOR.input.color}
+            backgroundColor={LOGIN_COLOR.input.background}
+          />
         </FormContainer>
       </KeyboardAwareScrollView>
     )
@@ -73,8 +92,8 @@ const LoginForm = connect(null, mapDispatchToProps)(LoginFormPresentational)
 class Login extends Component {
   render = () => {
     return (
-      <Body backgroundColor="#76C0E3">
-        <Title color="white">PROYECTA</Title>
+      <Body backgroundColor={LOGIN_COLOR.background}>
+        <Title color={LOGIN_COLOR.color}>PROYECTAPP</Title>
         <LoginForm />
       </Body>
     )

@@ -9,7 +9,12 @@ export const Body = styled.View`
   padding: 30px 30px;
 `
 
-export const ScrollView = styled.ScrollView``
+export const ScrollBody = styled.ScrollView`
+  flex: 1;
+  background-color: ${props =>
+    props.backgroundColor ? props.backgroundColor : "#fff"};
+  padding: 30px 30px;
+`
 
 export const Container = styled.View`
   display: flex;
@@ -19,6 +24,10 @@ export const Container = styled.View`
 export const Row = styled(Container)`
   flex-flow: row nowrap;
   justify-content: space-around;
+`
+export const CenterRow = styled(Row)`
+  justify-content: center;
+  align-items: center;
 `
 
 export const FormContainer = styled(Container)`
@@ -31,4 +40,8 @@ export const EventContainer = styled(Container)`
   flex-flow: column nowrap;
   justify-content: center;
   margin: 5px 0;
+`
+
+export const IconContainer = styled.View`
+  padding: 5px;
 `

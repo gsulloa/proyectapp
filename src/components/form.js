@@ -1,7 +1,10 @@
 import React from "react"
-import { View, Text } from "react-native"
 import styled from "styled-components/native"
+import PropTypes from "prop-types"
 import { Icon } from "react-native-elements"
+
+import { ButtonText as Text } from "./text"
+import { CenterRow as CenterRowContainer } from "./container"
 
 export const Form = styled.View`
   display: flex;
@@ -17,100 +20,59 @@ export const TextInput = styled.TextInput`
 `
 
 export const InputField = styled.View`
-  background-color: #b8dee9;
-  width: 100%;
+  background-color: ${props => (props.color ? props.color : undefined)};
+  flex: 1;
   display: flex;
   flex-flow: row nowrap;
   margin: 10px 0;
 `
 
-const IconContainer = styled.View`
-  padding: 5px;
-`
-
-export function iconField(locals) {
-  if (locals.hidden) {
-    return null
-  }
-
-  let stylesheet = locals.stylesheet
-  let formGroupStyle = stylesheet.formGroup.normal
-  let textboxViewStyle = stylesheet.textboxView.normal
-  let helpBlockStyle = stylesheet.helpBlock.normal
-  let errorBlockStyle = stylesheet.errorBlock
-
-  if (locals.hasError) {
-    formGroupStyle = stylesheet.formGroup.error
-    textboxViewStyle = stylesheet.textboxView.error
-    helpBlockStyle = stylesheet.helpBlock.error
-  }
-
-  if (locals.editable === false) {
-    textboxViewStyle = stylesheet.textboxView.notEditable
-  }
-
-  let help = locals.help ? (
-    <Text style={helpBlockStyle}>{locals.help}</Text>
-  ) : null
-  let error =
-    locals.hasError && locals.error ? (
-      <Text accessibilityLiveRegion="polite" style={errorBlockStyle}>
-        {locals.error}
-      </Text>
-    ) : null
-
-  return (
-    <View style={formGroupStyle}>
-      <InputField style={textboxViewStyle}>
-        <IconContainer>
-          <Icon {...locals.config.iconProps} />
-        </IconContainer>
-        <TextInput
-          accessibilityLabel={locals.label}
-          autoCapitalize={locals.autoCapitalize}
-          autoCorrect={locals.autoCorrect}
-          autoFocus={locals.autoFocus}
-          blurOnSubmit={locals.blurOnSubmit}
-          editable={locals.editable}
-          keyboardType={locals.keyboardType}
-          maxLength={locals.maxLength}
-          multiline={locals.multiline}
-          onBlur={locals.onBlur}
-          onEndEditing={locals.onEndEditing}
-          onFocus={locals.onFocus}
-          onLayout={locals.onLayout}
-          onSelectionChange={locals.onSelectionChange}
-          onSubmitEditing={locals.onSubmitEditing}
-          onContentSizeChange={locals.onContentSizeChange}
-          placeholderTextColor={locals.placeholderTextColor}
-          secureTextEntry={locals.secureTextEntry}
-          selectTextOnFocus={locals.selectTextOnFocus}
-          selectionColor={locals.selectionColor}
-          numberOfLines={locals.numberOfLines}
-          underlineColorAndroid={locals.underlineColorAndroid}
-          clearButtonMode={locals.clearButtonMode}
-          clearTextOnFocus={locals.clearTextOnFocus}
-          enablesReturnKeyAutomatically={locals.enablesReturnKeyAutomatically}
-          keyboardAppearance={locals.keyboardAppearance}
-          onKeyPress={locals.onKeyPress}
-          returnKeyType={locals.returnKeyType}
-          selectionState={locals.selectionState}
-          onChangeText={value => locals.onChange(value)}
-          onChange={locals.onChangeNative}
-          placeholder={locals.placeholder}
-          value={locals.value}
-        />
-      </InputField>
-      {help}
-      {error}
-    </View>
-  )
-}
-
 /**********
 Buttons
 ***********/
 
-export const Button = styled.Button`
-  align-self: ${props => (props.alignSelf ? props.alignSelf : "flex-end")};
+const TouchableHighlight = styled.TouchableHighlight`
+  background-color: ${props =>
+    props.backgroundColor ? props.backgroundColor : "transparent"};
+  margin: 10px 20px 10px 0;
+  flex: 1;
 `
+
+const CenterRow = styled(CenterRowContainer)`
+  padding: 10px 20px;
+  flex: 1;
+`
+
+const RightIconContainer = styled.View`
+  position: absolute;
+  right: 20px;
+`
+
+export const Button = ({ backgroundColor, title, onPress, icon, ...props }) => {
+  return (
+    <TouchableHighlight backgroundColor={backgroundColor} onPress={onPress}>
+      <CenterRow>
+        <Text textAlign="center" {...props}>
+          {title}
+        </Text>
+        {icon ? (
+          <RightIconContainer>
+            <Icon {...icon} color={props.color} />
+          </RightIconContainer>
+        ) : (
+          undefined
+        )}
+      </CenterRow>
+    </TouchableHighlight>
+  )
+}
+Button.propTypes = {
+  backgroundColor: PropTypes.string,
+  color: PropTypes.string,
+  title: PropTypes.string,
+  onPress: PropTypes.func,
+  icon: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string,
+  }),
+}

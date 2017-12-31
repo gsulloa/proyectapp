@@ -32,7 +32,7 @@ class Nav extends Component {
             <Tabs
               hideNavBar
               key="authenticatedRoot"
-              activeBackgroundColor={WITCH_MAIL_COLOR}
+              activeBackgroundColor={WITCH_MAIL_COLOR.background}
             >
               <Stack
                 key="reports"
@@ -73,7 +73,8 @@ class Nav extends Component {
     )
   }
 }
-
+WITCH_MAIL_COLOR
+WITCH_MAIL_COLOR
 const mapStateToProps = state => {
   return {
     authenticated: state.authentication.isAuthenticated,

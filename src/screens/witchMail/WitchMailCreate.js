@@ -8,6 +8,8 @@ import { WITCH_MAIL_COLOR } from "../../components/colors"
 import { Button } from "../../components/form"
 import { newWitchMail } from "../../redux/modules/witchMail"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
+import textField from "../../components/form/textField"
+import selectField from "../../components/form/selectField"
 
 const Form = t.form.Form
 const WitchMailFormStructGenerator = communities =>
@@ -18,8 +20,25 @@ const WitchMailFormStructGenerator = communities =>
 
 const options = {
   fields: {
+    community: {
+      template: selectField,
+      config: {
+        color: {
+          container: WITCH_MAIL_COLOR.input.background,
+          text: WITCH_MAIL_COLOR.input.color,
+        },
+      },
+    },
     content: {
       multiline: true,
+      returnKeyType: "next",
+      template: textField,
+      config: {
+        color: {
+          container: WITCH_MAIL_COLOR.input.background,
+          text: WITCH_MAIL_COLOR.input.color,
+        },
+      },
     },
   },
 }
@@ -65,7 +84,7 @@ class WitchMailCreate extends Component {
   }
   render = () => {
     return (
-      <Body backgroundColor={WITCH_MAIL_COLOR}>
+      <Body backgroundColor={WITCH_MAIL_COLOR.background}>
         <KeyboardAwareScrollView>
           <Form
             options={options}
@@ -73,7 +92,12 @@ class WitchMailCreate extends Component {
             value={this.state.value}
             onChange={this.onChange}
           />
-          <Button title="ENVIAR" onPress={this.handleSubmit} color="#00678A" />
+          <Button
+            title="ENVIAR"
+            onPress={this.handleSubmit}
+            color={WITCH_MAIL_COLOR.input.color}
+            backgroundColor={WITCH_MAIL_COLOR.input.background}
+          />
         </KeyboardAwareScrollView>
       </Body>
     )
