@@ -49,6 +49,7 @@ const mapStateToProps = (state, ownProps) => {
   devlog("ownProps", ownProps)
   return {
     sections: state.section.data[ownProps.manualId],
+    fetching: state.section.fetching,
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -68,6 +69,7 @@ class ReportsCreate extends Component {
     sections: PropTypes.array.isRequired,
     getSections: PropTypes.func.isRequired,
     newReport: PropTypes.func.isRequired,
+    fetching: PropTypes.bool,
   }
   static defaultProps = {
     sections: [],
@@ -110,6 +112,7 @@ class ReportsCreate extends Component {
             onPress={this.handleSubmit}
             color={REPORTS_COLOR.input.color}
             backgroundColor={REPORTS_COLOR.input.background}
+            disabled={this.props.fetching}
           />
         </KeyboardAwareScrollView>
       </Body>

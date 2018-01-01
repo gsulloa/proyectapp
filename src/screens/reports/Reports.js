@@ -12,6 +12,7 @@ import { devlog } from "../../utils/log"
 
 const mapStateToProps = state => ({
   manuals: state.manual.data,
+  fetching: state.manual.fetching,
 })
 const mapDispatchToProps = dispatch => ({
   getManuals: () => dispatch(getManuals()),
@@ -21,6 +22,7 @@ class Reports extends Component {
   static propTypes = {
     manuals: PropTypes.array.isRequired,
     getManuals: PropTypes.func.isRequired,
+    fetching: PropTypes.bool,
   }
   static defaultProps = {
     manuals: [],
@@ -41,6 +43,7 @@ class Reports extends Component {
               color={REPORTS_COLOR.input.color}
               backgroundColor={REPORTS_COLOR.input.background}
               icon={{ name: "account-circle" }}
+              disabled={this.props.fetching}
               center
             />
           )

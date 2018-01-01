@@ -35,7 +35,7 @@ class WitchMailShow extends Component {
   render = () => {
     devlog("WitchMailShow", this.props)
     return (
-      <Body backgroundColor={WITCH_MAIL_COLOR}>
+      <Body backgroundColor={WITCH_MAIL_COLOR.background}>
         <Text>{this.props.witchMail.content}</Text>
         <Text>Enviado por comunidad {this.props.witchMail.community}</Text>
         <Icon

@@ -5,10 +5,13 @@ import { Provider, connect } from "react-redux"
 import styled from "styled-components/native"
 import { Font } from "expo"
 
+import { netinfoConfig } from "./redux/modules/netinfo"
 import { hydrate } from "./redux/modules/hydratation"
 import { devlog } from "./utils/log"
+import { Toast } from "react-native-redux-toast"
 
 import Nav from "./Nav"
+import { Container } from "./components/container"
 
 const Screen = styled.View`
   flex: 1;
@@ -47,6 +50,7 @@ export class App extends Component {
       whitney: require("../assets/fonts/whitneymedium.otf"),
     })
     this.setState({ fontLoaded: true })
+    netinfoConfig(this.props.store)
   }
 
   render = () => {
@@ -56,9 +60,12 @@ export class App extends Component {
     }
     return (
       <Screen>
-        <StatusBar hidden />
+        <StatusBar />
         <Provider store={this.props.store}>
-          <Nav />
+          <Container>
+            <Nav />
+            <Toast />
+          </Container>
         </Provider>
       </Screen>
     )

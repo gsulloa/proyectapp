@@ -9,10 +9,16 @@ import witchMail from "./modules/witchMail"
 import manual from "./modules/manual"
 import section from "./modules/section"
 import event from "./modules/event"
+import netinfo from "./modules/netinfo"
+import offline from "./modules/offline"
+import report from "./modules/report"
+
+import { toastReducer as toast } from "react-native-redux-toast"
 
 const config = {
   key: "root",
   storage,
+  blacklist: ["hydratation", "routes", "netinfo", "toast"],
 }
 
 const reducer = persistCombineReducers(config, {
@@ -24,6 +30,10 @@ const reducer = persistCombineReducers(config, {
   manual,
   section,
   event,
+  netinfo,
+  offline,
+  report,
+  toast,
 })
 
 const rootReducer = (state, action) => {

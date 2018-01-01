@@ -13,6 +13,7 @@ import { getWitchMails } from "../../redux/modules/witchMail"
 const mapStateToProps = state => ({
   witchMails: state.witchMail.data,
   communities: state.community.data,
+  fetching: state.community.fetching || state.witchMail.fetching,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -24,6 +25,7 @@ class WitchMailIndex extends Component {
     getWitchMails: PropTypes.func.isRequired,
     witchMails: PropTypes.array.isRequired,
     communities: PropTypes.array.isRequired,
+    fetching: PropTypes.bool,
   }
   static defaultProps = {
     witchMails: [],
@@ -69,6 +71,7 @@ class WitchMailIndex extends Component {
                 onPress={this.readMail}
                 color={WITCH_MAIL_COLOR.input.color}
                 backgroundColor={WITCH_MAIL_COLOR.input.background}
+                disabled={this.props.fetching}
               />,
             ]
           : undefined}
@@ -77,6 +80,7 @@ class WitchMailIndex extends Component {
           onPress={this.downloadMails}
           color={WITCH_MAIL_COLOR.input.color}
           backgroundColor={WITCH_MAIL_COLOR.input.background}
+          disabled={this.props.fetching}
         />
       </Body>
     )

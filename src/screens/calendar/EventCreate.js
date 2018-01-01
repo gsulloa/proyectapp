@@ -56,6 +56,9 @@ const options = {
     },
   },
 }
+const mapStateToProps = state => ({
+  fetching: state.event.fetching,
+})
 
 const mapDispatchToProps = dispatch => ({
   newEvent: data => dispatch(newEvent(data)),
@@ -71,6 +74,7 @@ class EventCreate extends Component {
   static propTypes = {
     sections: PropTypes.array.isRequired,
     newEvent: PropTypes.func.isRequired,
+    fetching: PropTypes.bool,
   }
   static defaultProps = {
     sections: [],
@@ -103,6 +107,7 @@ class EventCreate extends Component {
             onPress={this.handleSubmit}
             color={CALENDAR_COLOR.input.color}
             backgroundColor={CALENDAR_COLOR.input.background}
+            disabled={this.props.fetching}
           />
         </KeyboardAwareScrollView>
       </Body>
@@ -110,4 +115,4 @@ class EventCreate extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(EventCreate)
+export default connect(mapStateToProps, mapDispatchToProps)(EventCreate)

@@ -46,6 +46,7 @@ const options = {
 const mapStateToProps = state => {
   return {
     communities: state.community.data,
+    fetching: state.community.fetching,
   }
 }
 const mapDispatchToProps = dispatch => ({
@@ -61,6 +62,7 @@ class WitchMailCreate extends Component {
   static propTypes = {
     communities: PropTypes.array.isRequired,
     newWitchMail: PropTypes.func.isRequired,
+    fetching: PropTypes.bool,
   }
   static defaultProps = {
     communities: [],
@@ -97,6 +99,7 @@ class WitchMailCreate extends Component {
             onPress={this.handleSubmit}
             color={WITCH_MAIL_COLOR.input.color}
             backgroundColor={WITCH_MAIL_COLOR.input.background}
+            disabled={this.props.fetching}
           />
         </KeyboardAwareScrollView>
       </Body>

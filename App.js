@@ -21,7 +21,9 @@ const initialState = {}
 const store = configureStore(initialState, { api })
 
 // App general settings
-const options = { hydratation: { blacklist: ["hydratation", "router"] } }
+const options = {
+  hydratation: { blacklist: ["hydratation", "routes", "netinfo", "toast"] },
+}
 
 devlog("index.js", "store", store, "options", options)
 

@@ -37,6 +37,13 @@ const TouchableHighlight = styled.TouchableHighlight`
   margin: 10px 20px 10px 0;
   flex: 1;
 `
+const ButtonView = styled.View`
+  background-color: ${props =>
+    props.backgroundColor ? props.backgroundColor : "transparent"};
+  opacity: 0.3;
+  margin: 10px 20px 10px 0;
+  flex: 1;
+`
 
 const CenterRow = styled(CenterRowContainer)`
   padding: 10px 20px;
@@ -48,25 +55,40 @@ const RightIconContainer = styled.View`
   right: 20px;
 `
 
-export const Button = ({ backgroundColor, title, onPress, icon, ...props }) => {
-  return (
-    <TouchableHighlight backgroundColor={backgroundColor} onPress={onPress}>
-      <CenterRow>
-        <Text textAlign="center" {...props}>
-          {title}
-        </Text>
-        {icon ? (
-          <RightIconContainer>
-            <Icon {...icon} color={props.color} />
-          </RightIconContainer>
-        ) : (
-          undefined
-        )}
-      </CenterRow>
-    </TouchableHighlight>
+export const Button = ({
+  disabled,
+  backgroundColor,
+  title,
+  onPress,
+  icon,
+  ...props
+}) => {
+  const button = (
+    <CenterRow>
+      <Text textAlign="center" {...props}>
+        {title}
+      </Text>
+      {icon ? (
+        <RightIconContainer>
+          <Icon {...icon} color={props.color} />
+        </RightIconContainer>
+      ) : (
+        undefined
+      )}
+    </CenterRow>
   )
+  if (disabled) {
+    return <ButtonView backgroundColor={backgroundColor}>{button}</ButtonView>
+  } else {
+    return (
+      <TouchableHighlight backgroundColor={backgroundColor} onPress={onPress}>
+        {button}
+      </TouchableHighlight>
+    )
+  }
 }
 Button.propTypes = {
+  disabled: PropTypes.bool,
   backgroundColor: PropTypes.string,
   color: PropTypes.string,
   title: PropTypes.string,

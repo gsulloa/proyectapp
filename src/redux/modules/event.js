@@ -4,6 +4,7 @@ import { doFetch } from "./fetching"
 import { newError } from "./error"
 import { LOGOUT_SUCCESS } from "./authentication"
 import { getDate, getTime } from "../../utils/datetime"
+import { ToastActionsCreators } from "react-native-redux-toast";
 
 const SET_EVENTS = "SET_EVENTS"
 
@@ -96,11 +97,13 @@ export function newEvent(data) {
     const response = await doFetch(
       dispatch,
       createEvent(api.api.withToken(getState().authentication.token), data),
-      type
+      type,
+      { status: getState().netinfo.online, content: data, post: true }
     )
     if (response.error) {
       newError(dispatch, { e: response.error }, type)
     } else {
+      dispatch(ToastActionsCreators.displayInfo("Evento creado correctamente"))
       dispatch(getEvents())
       Actions.popTo("calendarIndex")
     }

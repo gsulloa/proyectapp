@@ -1,7 +1,7 @@
 import { doFetch } from "./fetching"
 import { newError } from "./error"
 import { LOGOUT_SUCCESS } from "./authentication"
-import { devlog } from "../../utils/log"
+import { ToastActionsCreators } from "react-native-redux-toast";
 
 const type = "REPORT"
 const initialState = {
@@ -41,19 +41,21 @@ function createReport(api, data) {
 
 export function newReport(manualId, sectionId, content) {
   return async (dispatch, getState, api) => {
+    const data = {
+      manualId,
+      sectionId,
+      content,
+    }
     const response = await doFetch(
       dispatch,
-      createReport(api.api.withToken(getState().authentication.token), {
-        manualId,
-        sectionId,
-        content,
-      }),
-      type
+      createReport(api.api.withToken(getState().authentication.token), data),
+      type,
+      { status: getState().netinfo.online, content: data, post: true }
     )
     if (response.error) {
       newError(dispatch, { e: response.error }, type)
     } else {
-      devlog("Success")
+      dispatch(ToastActionsCreators.displayInfo("Reporte creado correctamente"))
     }
   }
 }

@@ -2,6 +2,7 @@ import { doFetch } from "./fetching"
 import { newError } from "./error"
 import { LOGOUT_SUCCESS } from "./authentication"
 import { Actions } from "react-native-router-flux"
+import { ToastActionsCreators } from "react-native-redux-toast";
 
 const SET_WITCHMAILS = "SET_WITCHMAILS"
 const SET_READ = "SET_READ"
@@ -108,12 +109,18 @@ export function newWitchMail({ community, content }) {
         community,
         content
       ),
-      type
+      type,
+      {
+        status: getState().netinfo.online,
+        content: { recipientId: community, content },
+        post: true,
+      }
     )
     if (response.error) {
       newError(dispatch, { e: response.error }, type)
     } else {
       Actions.popTo("witchMailIndex")
+      dispatch(ToastActionsCreators.displayInfo("Correo creado correctamente."))
     }
   }
 }

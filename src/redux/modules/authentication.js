@@ -2,6 +2,7 @@ import { doFetch } from "./fetching"
 import { newError } from "./error"
 import { Actions } from "react-native-router-flux"
 import base64 from "../../utils/base64"
+import { syncOffline } from "./offline"
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
@@ -65,6 +66,7 @@ export function loginUser(creds) {
       const userInfo = JSON.parse(base64.atob(data[1]))
       dispatch(receiveLogin(userInfo, response.token))
       Actions.replace("authenticatedRoot")
+      dispatch(syncOffline())
     }
   }
 }
