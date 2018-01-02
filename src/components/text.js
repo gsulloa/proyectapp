@@ -6,6 +6,12 @@ export const Title = styled.Text`
   text-align: center;
   font-family: whitney-bold;
 `
+export const SubTitle = styled.Text`
+  color: ${props => (props.color ? props.color : "black")};
+  font-size: 30px;
+  text-align: left;
+  font-family: whitney-bold;
+`
 
 export const Text = styled.Text`
   color: ${props => (props.color ? props.color : "black")};

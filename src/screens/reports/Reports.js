@@ -39,10 +39,12 @@ class Reports extends Component {
             <Button
               key={manual.id}
               title={manual.name.toUpperCase()}
-              onPress={() => Actions.reportsCreate({ manualId: manual.id })}
+              onPress={() =>
+                Actions.reportsCreate({ manualId: manual.id, manual })
+              }
               color={REPORTS_COLOR.input.color}
               backgroundColor={REPORTS_COLOR.input.background}
-              icon={{ name: "account-circle" }}
+              icon={{ name: manual.icon }}
               disabled={this.props.fetching}
               center
             />

@@ -10,7 +10,7 @@ import reducers from "./reducers"
 
 export default function configureStore(initialState = {}, { api } = {}) {
   const shouldLog = process.env.NODE_ENV === "development"
-  const shouldReport = false
+  const shouldReport = true
 
   // Setup middleware
   const middleware = [

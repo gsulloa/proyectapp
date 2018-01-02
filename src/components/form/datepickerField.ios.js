@@ -10,6 +10,8 @@ import {
   DatePickerIOS,
 } from "react-native"
 
+import { getDatetime } from "../../utils/datetime"
+
 const UIPICKER_HEIGHT = 216
 
 class CollapsibleDatePickerIOS extends React.Component {
@@ -32,7 +34,7 @@ class CollapsibleDatePickerIOS extends React.Component {
       datepickerStyle = stylesheet.datepicker.error
       dateValueStyle = stylesheet.dateValue.error
     }
-    let formattedValue = String(locals.value)
+    let formattedValue = getDatetime(locals.value)
     let animation = Animated.timing
     let animationConfig = {
       duration: 200,
@@ -50,7 +52,7 @@ class CollapsibleDatePickerIOS extends React.Component {
     }
     const height = this.state.isCollapsed ? 0 : UIPICKER_HEIGHT
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <TouchableOpacity
           style={touchableStyle}
           disabled={locals.disabled}
@@ -76,7 +78,6 @@ class CollapsibleDatePickerIOS extends React.Component {
           style={{ height: this.state.height, overflow: "hidden" }}
         >
           <DatePickerIOS
-            ref="input"
             accessibilityLabel={locals.label}
             date={locals.value}
             maximumDate={locals.maximumDate}
@@ -104,19 +105,14 @@ function datepicker(locals) {
 
   const stylesheet = locals.stylesheet
   let formGroupStyle = stylesheet.formGroup.normal
-  let controlLabelStyle = stylesheet.controlLabel.normal
   let helpBlockStyle = stylesheet.helpBlock.normal
   const errorBlockStyle = stylesheet.errorBlock
 
   if (locals.hasError) {
     formGroupStyle = stylesheet.formGroup.error
-    controlLabelStyle = stylesheet.controlLabel.error
     helpBlockStyle = stylesheet.helpBlock.error
   }
 
-  const label = locals.label ? (
-    <Text style={controlLabelStyle}>{locals.label}</Text>
-  ) : null
   const help = locals.help ? (
     <Text style={helpBlockStyle}>{locals.help}</Text>
   ) : null
@@ -129,7 +125,6 @@ function datepicker(locals) {
 
   return (
     <Container style={formGroupStyle}>
-      {label}
       <InputField color={locals.config.color.container}>
         <CollapsibleDatePickerIOS locals={locals} />
       </InputField>

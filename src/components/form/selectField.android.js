@@ -10,7 +10,6 @@ function select(locals) {
 
   var stylesheet = locals.stylesheet
   var formGroupStyle = stylesheet.formGroup.normal
-  var controlLabelStyle = stylesheet.controlLabel.normal
   var selectStyle = Object.assign(
     {},
     stylesheet.select.normal,
@@ -21,14 +20,10 @@ function select(locals) {
 
   if (locals.hasError) {
     formGroupStyle = stylesheet.formGroup.error
-    controlLabelStyle = stylesheet.controlLabel.error
     selectStyle = stylesheet.select.error
     helpBlockStyle = stylesheet.helpBlock.error
   }
 
-  var label = locals.label ? (
-    <Text style={controlLabelStyle}>{locals.label}</Text>
-  ) : null
   var help = locals.help ? (
     <Text style={helpBlockStyle}>{locals.help}</Text>
   ) : null
@@ -45,7 +40,6 @@ function select(locals) {
 
   return (
     <Container style={formGroupStyle}>
-      {label}
       <InputField color={locals.config.color.container}>
         <Picker
           accessibilityLabel={locals.label}

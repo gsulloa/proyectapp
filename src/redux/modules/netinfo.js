@@ -1,6 +1,7 @@
 import { NetInfo } from "react-native"
 import { ToastActionsCreators } from "react-native-redux-toast"
 import { syncOffline } from "./offline"
+import { getEvents } from "./event"
 
 const initialState = {
   online: false,
@@ -44,6 +45,8 @@ export const netinfoConfig = store => {
         ToastActionsCreators.displayInfo("Conexión a internet establecida.")
       )
       store.dispatch(syncOffline())
+      if (store.getState().authentication.isAuthenticated)
+        store.dispatch(getEvents())
     }
   }
   NetInfo.addEventListener("connectionChange", handleConnectivityChange)

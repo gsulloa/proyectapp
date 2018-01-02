@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components/native"
 import PropTypes from "prop-types"
-import { Icon } from "react-native-elements"
+import { Icon } from "./icons"
 
 import { ButtonText as Text } from "./text"
 import { CenterRow as CenterRowContainer } from "./container"
@@ -70,7 +70,7 @@ export const Button = ({
       </Text>
       {icon ? (
         <RightIconContainer>
-          <Icon {...icon} color={props.color} />
+          <Icon style={{ fontSize: 20 }} {...icon} color={props.color} />
         </RightIconContainer>
       ) : (
         undefined

@@ -1,3 +1,5 @@
+export const PROYECTA_COLOR = "#34b4e8"
+
 export const LOGIN_COLOR = {
   background: "#2f9bbf",
   color: "#b8dee9",

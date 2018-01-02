@@ -17,6 +17,7 @@ const LoginFormStruct = t.struct({
   password: t.String,
 })
 const options = {
+  auto: "placeholders",
   fields: {
     password: {
       secureTextEntry: true,
@@ -30,6 +31,7 @@ const options = {
       },
     },
     email: {
+      placeholder: "****@uc.cl",
       autoCapitalize: "none",
       template: textField,
       keyboardType: "email-address",
@@ -70,6 +72,7 @@ class LoginFormPresentational extends Component {
       <KeyboardAwareScrollView>
         <FormContainer>
           <Form
+            form={form => (this.form = form)}
             type={LoginFormStruct}
             options={options}
             value={this.state.value}

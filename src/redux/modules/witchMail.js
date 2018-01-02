@@ -96,6 +96,13 @@ export function getWitchMails() {
       newError(dispatch, { e: response.error }, type)
     } else {
       dispatch(setWitchMails(response))
+      let message
+      if (response.length) {
+        message = "Correos descargados correctamente."
+      } else {
+        message = "No existen nuevos correos :("
+      }
+      dispatch(ToastActionsCreators.displayInfo(message))
     }
   }
 }

@@ -18,13 +18,18 @@ export const ScrollBody = styled.ScrollView`
 
 export const Container = styled.View`
   display: flex;
-  flex: 1;
+  flex: ${props => (props.flex ? props.flex : "1")};
 `
 
 export const Row = styled(Container)`
   flex-flow: row nowrap;
   justify-content: space-around;
 `
+export const NoFlexRow = styled.View`
+  flex-flow: row nowrap;
+  justify-content: space-around;
+`
+
 export const CenterRow = styled(Row)`
   justify-content: center;
   align-items: center;

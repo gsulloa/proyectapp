@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Icon } from "react-native-elements"
+import { Icon } from "./components/icons"
 import DrawerComponent from "./components/DrawerComponent"
 
 import WitchMailIndex from "./screens/witchMail/WitchMailIndex"
@@ -17,8 +17,11 @@ import Reports from "./screens/reports/Reports"
 import ReportsCreate from "./screens/reports/ReportsCreate"
 import Calendar from "./screens/calendar/Calendar"
 import EventCreate from "./screens/calendar/EventCreate"
+import Anthem from "./screens/Anthem";
 
 const ConnectedRouter = connect()(Router)
+
+const StyledIcon = props => <Icon style={{ fontSize: 30 }} {...props} />
 
 class Nav extends Component {
   static propTypes = {
@@ -33,18 +36,19 @@ class Nav extends Component {
               hideNavBar
               key="authenticatedRoot"
               activeBackgroundColor={WITCH_MAIL_COLOR.background}
+              showLabel={false}
             >
               <Stack
                 key="reports"
-                icon={() => <Icon name="report" />}
-                title="Reportes"
+                icon={() => <StyledIcon name="manual" />}
+                title="Comentarios"
               >
                 <Scene key="reportsIndex" component={Reports} />
                 <Scene key="reportsCreate" component={ReportsCreate} back />
               </Stack>
               <Stack
                 key="calendar"
-                icon={() => <Icon name="calendar" type="font-awesome" />}
+                icon={() => <StyledIcon name="calendar" />}
                 title="Calendario"
               >
                 <Scene key="calendarIndex" component={Calendar} />
@@ -52,7 +56,7 @@ class Nav extends Component {
               </Stack>
               <Stack
                 key="witchMail"
-                icon={() => <Icon name="ios-mail" type="ionicon" />}
+                icon={() => <StyledIcon name="witch-mail" />}
                 title="Correo de Brujas"
               >
                 <Scene key="witchMailIndex" component={WitchMailIndex} />
@@ -61,6 +65,12 @@ class Nav extends Component {
                 <Scene key="witchMailBox" component={WitchMailBox} back />
               </Stack>
             </Tabs>
+            <Scene
+              key="anthem"
+              component={Anthem}
+              title="Himno Proyecta"
+              back
+            />
           </Drawer>
           <Scene
             key="signIn"

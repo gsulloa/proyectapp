@@ -6,8 +6,12 @@ export function newError(dispatch, error, type) {
     payload: error,
   })
   dispatch(
-    ToastActionsCreators.displayError(
-      `Error en modulo ${type}:\nInformación: ${JSON.stringify(error)}`
-    )
+    ToastActionsCreators.displayError(`
+Error en modulo ${type}:
+Información: ${
+      error.e.message ? JSON.stringify(error.e.message) : "ERROR DESCONOCIDO"
+    }
+En caso de que el error persista, avisar por el grupo de jefes :)
+`)
   )
 }

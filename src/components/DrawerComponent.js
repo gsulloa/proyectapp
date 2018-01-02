@@ -1,11 +1,15 @@
 import React from "react"
 import styled from "styled-components/native"
 import { connect } from "react-redux"
+import { List, ListItem, Avatar } from "react-native-elements"
 import PropTypes from "prop-types"
 import { CenterText } from "./text"
 import { Button } from "./form"
 
 import { logoutUser } from "../redux/modules/authentication"
+import { NoFlexRow as Row, Container, CenterRow } from "./container"
+import { Actions } from "react-native-router-flux"
+import { PROYECTA_COLOR } from "./colors";
 
 const DrawerView = styled.View`
   margin: 30px 15px;
@@ -32,6 +36,12 @@ const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logoutUser()),
 })
 
+const getInitials = fullName => {
+  let initials = fullName.match(/\b\w/g) || []
+  initials = ((initials.shift() || "") + (initials.pop() || "")).toUpperCase()
+  return initials
+}
+
 class DrawerContent extends React.Component {
   static propTypes = {
     logout: PropTypes.func,
@@ -47,11 +57,42 @@ class DrawerContent extends React.Component {
   render() {
     return (
       <DrawerView>
-        <CenterText>
-          Iniciaste sesión como {this.props.name} ({this.props.email})
-        </CenterText>
-        <CenterText>Comunidad {this.props.community}</CenterText>
-        <Button onPress={this.props.logout} title="Logout" color="red" />
+        <Row>
+          <Avatar
+            medium
+            rounded
+            title={getInitials(this.props.name)}
+            overlayContainerStyle={{ backgroundColor: PROYECTA_COLOR }}
+          />
+          <Container>
+            <CenterText>{this.props.name}</CenterText>
+            <CenterText>{this.props.email}</CenterText>
+            <CenterText>Comunidad: {this.props.community}</CenterText>
+          </Container>
+        </Row>
+        <List containerStyle={{ marginBottom: 20 }}>
+          <ListItem
+            title="Comentarios"
+            onPress={() => Actions.replace("reports")}
+          />
+          <ListItem
+            title="Calendario de Eventos"
+            onPress={() => Actions.replace("calendar")}
+          />
+          <ListItem
+            title="Correo de Brujas"
+            onPress={() => Actions.replace("witchMail")}
+          />
+          <ListItem
+            title="Himno de Proyecta"
+            onPress={() => Actions.push("anthem")}
+          />
+          <ListItem
+            title="Logout"
+            onPress={this.props.logout}
+            style={{ color: "red" }}
+          />
+        </List>
       </DrawerView>
     )
   }

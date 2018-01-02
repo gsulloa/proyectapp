@@ -48,6 +48,7 @@ export class App extends Component {
       "whitney-light": require("../assets/fonts/whitneylight.otf"),
       "whitney-light-italic": require("../assets/fonts/whitneylightitalic.otf"),
       whitney: require("../assets/fonts/whitneymedium.otf"),
+      ProyectappIcons: require("../assets/icons/proyectapp-icons.ttf"),
     })
     this.setState({ fontLoaded: true })
     netinfoConfig(this.props.store)
@@ -60,7 +61,7 @@ export class App extends Component {
     }
     return (
       <Screen>
-        <StatusBar />
+        <StatusBar hidden />
         <Provider store={this.props.store}>
           <Container>
             <Nav />

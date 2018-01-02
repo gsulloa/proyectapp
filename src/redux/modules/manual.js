@@ -8,7 +8,11 @@ const type = "MANUAL"
 const initialState = {
   fetching: false,
   error: false,
-  data: [],
+  data: [
+    { id: 1, name: "Logística", icon: "logistics" },
+    { id: 2, name: "Talleres", icon: "workshop" },
+    { id: 3, name: "Formación", icon: "education" },
+  ],
 }
 
 export default function manual(state = initialState, action) {
@@ -16,7 +20,7 @@ export default function manual(state = initialState, action) {
     case SET_MANUALS:
       return {
         ...state,
-        ...action.payload,
+        // ...action.payload,
       }
     case `${type}_FETCH_START`:
       return {

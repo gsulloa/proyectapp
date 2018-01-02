@@ -1,7 +1,7 @@
 import { doFetch } from "./fetching"
 import { newError } from "./error"
 import { LOGOUT_SUCCESS } from "./authentication"
-import { ToastActionsCreators } from "react-native-redux-toast";
+import { ToastActionsCreators } from "react-native-redux-toast"
 
 const type = "REPORT"
 const initialState = {
@@ -55,7 +55,9 @@ export function newReport(manualId, sectionId, content) {
     if (response.error) {
       newError(dispatch, { e: response.error }, type)
     } else {
-      dispatch(ToastActionsCreators.displayInfo("Reporte creado correctamente"))
+      dispatch(
+        ToastActionsCreators.displayInfo("Comentario creado correctamente.")
+      )
     }
   }
 }

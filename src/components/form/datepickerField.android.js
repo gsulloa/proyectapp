@@ -7,6 +7,7 @@ import {
   TimePickerAndroid,
   TouchableNativeFeedback,
 } from "react-native"
+import { getDate, getTime, getDatetime } from "../../utils/datetime"
 
 function datepicker(locals) {
   if (locals.hidden) {
@@ -15,7 +16,6 @@ function datepicker(locals) {
 
   var stylesheet = locals.stylesheet
   var formGroupStyle = stylesheet.formGroup.normal
-  var controlLabelStyle = stylesheet.controlLabel.normal
   // var datepickerStyle = stylesheet.datepicker.normal
   var helpBlockStyle = stylesheet.helpBlock.normal
   var errorBlockStyle = stylesheet.errorBlock
@@ -23,7 +23,6 @@ function datepicker(locals) {
 
   if (locals.hasError) {
     formGroupStyle = stylesheet.formGroup.error
-    controlLabelStyle = stylesheet.controlLabel.error
     // datepickerStyle = stylesheet.datepicker.error
     helpBlockStyle = stylesheet.helpBlock.error
     dateValueStyle = stylesheet.dateValue.error
@@ -47,11 +46,11 @@ function datepicker(locals) {
    * `locals.config.dateFormat`: Date only format
    * `locals.config.timeFormat`: Time only format
    */
-  var formattedValue = String(locals.value)
+  var formattedValue = getDatetime(locals.value)
   var background = TouchableNativeFeedback.SelectableBackground() // eslint-disable-line new-cap
   var dialogMode = "default"
-  var formattedDateValue = locals.value.toDateString()
-  var formattedTimeValue = locals.value.toTimeString()
+  var formattedDateValue = getDate(locals.value)
+  var formattedTimeValue = getTime(locals.value)
   if (locals.config) {
     if (locals.config.format) {
       formattedValue = locals.config.format(locals.value)
@@ -70,9 +69,6 @@ function datepicker(locals) {
     }
   }
 
-  var label = locals.label ? (
-    <Text style={controlLabelStyle}>{locals.label}</Text>
-  ) : null
   var help = locals.help ? (
     <Text style={helpBlockStyle}>{locals.help}</Text>
   ) : null
@@ -90,7 +86,6 @@ function datepicker(locals) {
     <Container style={formGroupStyle}>
       {datePickerMode === "datetime" ? (
         <Container>
-          {label}
           <InputField color={locals.config.color.container}>
             <TouchableNativeFeedback
               accessible={true}
@@ -211,10 +206,7 @@ function datepicker(locals) {
               }
             }}
           >
-            <Container>
-              {label}
-              {value}
-            </Container>
+            <Container>{value}</Container>
           </TouchableNativeFeedback>
         </InputField>
       )}

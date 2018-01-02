@@ -85,7 +85,6 @@ class CollapsiblePickerIOS extends React.Component {
         >
           <Picker
             accessibilityLabel={locals.label}
-            ref="input"
             style={selectStyle}
             selectedValue={locals.value}
             onValueChange={locals.onChange}
@@ -114,21 +113,16 @@ function select(locals) {
 
   const stylesheet = locals.stylesheet
   let formGroupStyle = stylesheet.formGroup.normal
-  let controlLabelStyle = stylesheet.controlLabel.normal
   // let selectStyle = stylesheet.select.normal
   let helpBlockStyle = stylesheet.helpBlock.normal
   let errorBlockStyle = stylesheet.errorBlock
 
   if (locals.hasError) {
     formGroupStyle = stylesheet.formGroup.error
-    controlLabelStyle = stylesheet.controlLabel.error
     // selectStyle = stylesheet.select.error
     helpBlockStyle = stylesheet.helpBlock.error
   }
 
-  const label = locals.label ? (
-    <Text style={controlLabelStyle}>{locals.label}</Text>
-  ) : null
   const help = locals.help ? (
     <Text style={helpBlockStyle}>{locals.help}</Text>
   ) : null
@@ -145,7 +139,6 @@ function select(locals) {
 
   return (
     <Container style={formGroupStyle}>
-      {label}
       <InputField color={locals.config.color.container}>
         <CollapsiblePickerIOS locals={locals} />
       </InputField>

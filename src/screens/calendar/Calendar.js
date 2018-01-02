@@ -11,6 +11,7 @@ import { CALENDAR_COLOR } from "../../components/colors"
 import { devlog } from "../../utils/log"
 import { getEvents } from "../../redux/modules/event"
 import { getCommunities } from "../../redux/modules/community"
+import { getDate, addZero } from "../../utils/datetime"
 
 const mapStateToProps = state => ({
   communities: state.community.data,
@@ -35,11 +36,11 @@ class Calendar extends Component {
     communities: [],
   }
   formatEvents = () => {
-    const firstDay = 17
-    const lastDay = 25
+    const firstDay = 1
+    const lastDay = 20
     const items = {}
     for (let day = firstDay; day <= lastDay; day++) {
-      items[`2017-12-${day}`] = []
+      items[`2018-01-${addZero(day)}`] = []
     }
     this.props.events.forEach(event => {
       if (!items[event.date]) {
@@ -68,10 +69,10 @@ class Calendar extends Component {
     return (
       <Body backgroundColor={CALENDAR_COLOR.background}>
         <Agenda
-          selected={"2017-12-23"}
+          selected={getDate(new Date())}
           items={this.formatEvents()}
-          minDate={"2017-12-17"}
-          maxDate={"2017-12-25"}
+          minDate={"2018-01-01"}
+          maxDate={"2018-01-20"}
         />
         <Icon
           reverse

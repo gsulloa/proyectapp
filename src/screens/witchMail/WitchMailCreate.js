@@ -19,8 +19,10 @@ const WitchMailFormStructGenerator = communities =>
   })
 
 const options = {
+  auto: "placeholders",
   fields: {
     community: {
+      nullOption: { value: "", text: "Comunidad" },
       template: selectField,
       config: {
         color: {
@@ -30,6 +32,7 @@ const options = {
       },
     },
     content: {
+      placeholder: "Contenido del correo",
       multiline: true,
       returnKeyType: "next",
       template: textField,
@@ -74,8 +77,11 @@ class WitchMailCreate extends Component {
     this.setState({ value })
   }
   handleSubmit = () => {
-    this.props.newWitchMail(this.state.value)
-    this.setState({ value: initialValues })
+    const value = this.form.getValue()
+    if (value) {
+      this.props.newWitchMail(value)
+      this.setState({ value: initialValues })
+    }
   }
   getStruct = () => {
     const communities = {}
@@ -89,6 +95,7 @@ class WitchMailCreate extends Component {
       <Body backgroundColor={WITCH_MAIL_COLOR.background}>
         <KeyboardAwareScrollView>
           <Form
+            ref={form => (this.from = form)}
             options={options}
             type={this.getStruct()}
             value={this.state.value}

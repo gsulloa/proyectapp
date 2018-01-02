@@ -21,8 +21,10 @@ const EventFormStruct = t.struct({
 })
 
 const options = {
+  auto: "placeholders",
   fields: {
     name: {
+      placeholder: "Nombre del evento",
       returnKeyType: "next",
       template: textField,
       config: {
@@ -33,6 +35,7 @@ const options = {
       },
     },
     description: {
+      placeholder: "Descripción del evento",
       returnKeyType: "next",
       multiline: true,
       template: textField,
@@ -86,10 +89,13 @@ class EventCreate extends Component {
     this.setState({ value })
   }
   handleSubmit = () => {
-    this.props.newEvent(this.state.value)
-    this.setState({
-      value: initialValues,
-    })
+    const value = this.form.getValue()
+    if (value) {
+      this.props.newEvent(value)
+      this.setState({
+        value: initialValues,
+      })
+    }
   }
   render = () => {
     devlog("EventCreate", this.props)
@@ -97,6 +103,7 @@ class EventCreate extends Component {
       <Body backgroundColor={CALENDAR_COLOR.background}>
         <KeyboardAwareScrollView>
           <Form
+            ref={form => (this.form = form)}
             options={options}
             type={EventFormStruct}
             value={this.state.value}

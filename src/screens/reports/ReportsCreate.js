@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import t from "tcomb-form-native"
 
-import { Body } from "../../components/container"
+import { Body, NoFlexRow as Row } from "../../components/container"
 import { REPORTS_COLOR } from "../../components/colors"
 import { Button } from "../../components/form"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
@@ -12,6 +12,8 @@ import { getSections } from "../../redux/modules/section"
 import { newReport } from "../../redux/modules/report"
 import textField from "../../components/form/textField"
 import selectField from "../../components/form/selectField"
+import { SubTitle } from "../../components/text"
+import { Icon } from "../../components/icons"
 
 const Form = t.form.Form
 const ReportsFormStructGenerator = sections =>
@@ -21,8 +23,10 @@ const ReportsFormStructGenerator = sections =>
   })
 
 const options = {
+  auto: "placeholders",
   fields: {
     content: {
+      placeholder: "Ingresa tu comentario",
       multiline: true,
       template: textField,
       numberOfLines: 7,
@@ -34,6 +38,7 @@ const options = {
       },
     },
     section: {
+      nullOption: { value: "", text: "Sección" },
       template: selectField,
       config: {
         color: {
@@ -66,6 +71,10 @@ const initialValues = {
 class ReportsCreate extends Component {
   static propTypes = {
     manualId: PropTypes.number.isRequired,
+    manual: PropTypes.shape({
+      name: PropTypes.string,
+      icon: PropTypes.string,
+    }),
     sections: PropTypes.array.isRequired,
     getSections: PropTypes.func.isRequired,
     newReport: PropTypes.func.isRequired,
@@ -84,10 +93,13 @@ class ReportsCreate extends Component {
     this.setState({ value })
   }
   handleSubmit = () => {
-    this.props.newReport({ ...this.state.value, manual: this.props.manualId })
-    this.setState({
-      value: initialValues,
-    })
+    const value = this.form.getValue()
+    if (value) {
+      this.props.newReport({ ...value, manual: this.props.manualId })
+      this.setState({
+        value: initialValues,
+      })
+    }
   }
   getStruct = () => {
     const sections = {}
@@ -100,8 +112,19 @@ class ReportsCreate extends Component {
     devlog("ReportsCreate", this.props)
     return (
       <Body backgroundColor={REPORTS_COLOR.background}>
+        <Row style={{ flex: 0 }}>
+          <SubTitle color={REPORTS_COLOR.color}>
+            {this.props.manual.name}
+          </SubTitle>
+          <Icon
+            name={this.props.manual.icon}
+            style={{ fontSize: 30 }}
+            color={REPORTS_COLOR.color}
+          />
+        </Row>
         <KeyboardAwareScrollView>
           <Form
+            ref={form => (this.form = form)}
             options={options}
             type={this.getStruct()}
             value={this.state.value}

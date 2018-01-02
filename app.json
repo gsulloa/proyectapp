@@ -1,5 +1,18 @@
 {
   "expo": {
-    "sdkVersion": "23.0.0"
+    "name": "Proyectapp",
+    "icon": "./assets/icon.png",
+    "version": "0.5.0",
+    "slug": "proyectapp",
+    "sdkVersion": "23.0.0",
+    "privacy": "public",
+    "githubUrl": "https://github.com/gsulloa/proyectapp",
+    "primaryColor": "#34b4e8",
+    "ios": {
+      "bundleIdentifier": "com.proyecta.proyectapp"
+    },
+    "android": {
+      "package": "com.proyecta.proyectapp"
+    }
   }
 }
