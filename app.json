@@ -2,7 +2,7 @@
   "expo": {
     "name": "Proyectapp",
     "icon": "./assets/icon.png",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "slug": "proyectapp",
     "sdkVersion": "23.0.0",
     "privacy": "public",

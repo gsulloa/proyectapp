@@ -77,9 +77,8 @@ class WitchMailCreate extends Component {
     this.setState({ value })
   }
   handleSubmit = () => {
-    const value = this.form.getValue()
-    if (value) {
-      this.props.newWitchMail(value)
+    if (this.state.value.content != "" && this.state.value.community != "") {
+      this.props.newWitchMail(this.state.value)
       this.setState({ value: initialValues })
     }
   }
